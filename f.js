@@ -26435,13 +26435,20 @@ define('build', function (require) {
             });
         }
     };
-
+// node f.js name=detail/entry_dsdetail_main out=static/js/detail/entry_dsdetail_main.js
     function makeBuildBaseConfig() {
         return {
+            baseUrl: './dev/js',
+            excludeShallow: ['jquery'],
+            name: 'detail/entry_main',
+            out: 'static/js/detail/entry_main.js',
             appDir: "",
             pragmas: {},
-            paths: {},
-            optimize: "uglify",
+            paths: {
+                jquery: 'empty:',
+                util: 'plugins/util'
+            },
+            optimize: "none",//uglify
             optimizeCss: "standard.keepLines.keepWhitespace",
             inlineText: true,
             isBuild: true,
@@ -26457,7 +26464,6 @@ define('build', function (require) {
             _buildPathToModuleIndex: {}
         };
     }
-
     /**
      * Some JS may not be valid if concatenated with other JS, in particular
      * the style of omitting semicolons and rely on ASI. Add a semicolon in
